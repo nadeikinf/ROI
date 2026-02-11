@@ -1,0 +1,909 @@
+/* ========================================
+   CSS Variables
+   ======================================== */
+:root {
+    /* Primary colors */
+    --primary: #667eea;
+    --primary-dark: #5a67d8;
+    --secondary: #764ba2;
+    
+    /* Accent colors */
+    --accent: #00d4aa;
+    --accent-light: #38ef7d;
+    
+    /* Status colors */
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    
+    /* Neutral colors */
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-card: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    --gradient-success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    /* Border radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 350ms ease;
+    
+    /* Font */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ========================================
+   Reset & Base
+   ======================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-family);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================
+   Container
+   ======================================== */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+@media (min-width: 640px) {
+    .container {
+        padding: 32px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 48px;
+    }
+}
+
+/* ========================================
+   Header
+   ======================================== */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+
+@media (min-width: 640px) {
+    .header__title {
+        font-size: 2.25rem;
+    }
+}
+
+.header__subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/* ========================================
+   Section Titles
+   ======================================== */
+.section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title::before {
+    content: '';
+    width: 4px;
+    height: 20px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+}
+
+/* ========================================
+   Input Section
+   ======================================== */
+.input-section {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 24px;
+}
+
+@media (min-width: 640px) {
+    .input-section {
+        padding: 32px;
+    }
+}
+
+/* ========================================
+   Input Groups
+   ======================================== */
+.input-group {
+    margin-bottom: 28px;
+}
+
+.input-group:last-child {
+    margin-bottom: 0;
+}
+
+.input-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.input-label__text {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.input-label__value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+}
+
+/* ========================================
+   Slider (Range Input)
+   ======================================== */
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);
+    outline: none;
+    cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    border: 3px solid var(--primary);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-xl);
+}
+
+.slider::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    border: 3px solid var(--primary);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.slider::-moz-range-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-xl);
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+/* ========================================
+   Select
+   ======================================== */
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid var(--text-secondary);
+    pointer-events: none;
+}
+
+.select {
+    width: 100%;
+    padding: 14px 44px 14px 16px;
+    font-size: 1rem;
+    font-family: var(--font-family);
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.select:hover {
+    border-color: var(--primary);
+}
+
+.select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+/* ========================================
+   Results Section
+   ======================================== */
+.results-section {
+    margin-bottom: 24px;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 480px) {
+    .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 640px) {
+    .results-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ========================================
+   Result Cards
+   ======================================== */
+.result-card {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.result-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.result-card__icon--time {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+    color: var(--primary);
+}
+
+.result-card__icon--money {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(52, 211, 153, 0.15) 100%);
+    color: var(--success);
+}
+
+.result-card__icon--net {
+    background: linear-gradient(135deg, rgba(0, 212, 170, 0.15) 0%, rgba(56, 239, 125, 0.15) 100%);
+    color: var(--accent);
+}
+
+.result-card__icon--payback {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(251, 191, 36, 0.15) 100%);
+    color: var(--warning);
+}
+
+.result-card__icon--roi {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(0, 212, 170, 0.15) 100%);
+    color: var(--primary);
+}
+
+.result-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.result-card__label {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.result-card__value {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+@media (min-width: 640px) {
+    .result-card__value {
+        font-size: 1.25rem;
+    }
+}
+
+/* Highlighted card */
+.result-card--highlight {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, rgba(251, 191, 36, 0.05) 100%);
+    border: 2px solid rgba(245, 158, 11, 0.3);
+}
+
+.result-card--roi {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(0, 212, 170, 0.05) 100%);
+    border: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+/* ========================================
+   Chart Section
+   ======================================== */
+.chart-section {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 24px;
+}
+
+@media (min-width: 640px) {
+    .chart-section {
+        padding: 32px;
+    }
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .chart-container {
+        height: 350px;
+    }
+}
+
+/* Chart Legend */
+.chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light);
+}
+
+.chart-legend__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.chart-legend__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.chart-legend__dot--loss {
+    background: var(--danger);
+}
+
+.chart-legend__dot--profit {
+    background: var(--success);
+}
+
+.chart-legend__dot--breakeven {
+    background: var(--warning);
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+.footer {
+    text-align: center;
+    padding: 24px 0;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.input-section,
+.results-section,
+.chart-section {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.results-section {
+    animation-delay: 0.1s;
+}
+
+.chart-section {
+    animation-delay: 0.2s;
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+.text-success {
+    color: var(--success);
+}
+
+.text-danger {
+    color: var(--danger);
+}
+
+/* ========================================
+   Tile Select (замена селектов)
+   ======================================== */
+.tile-select {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+}
+
+@media (max-width: 480px) {
+    .tile-select {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+}
+
+.tile-select__option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--bg-primary);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.tile-select__option:hover {
+    border-color: var(--primary);
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.tile-select__option--active {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+}
+
+.tile-select__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: var(--bg-secondary);
+}
+
+/* Иконки сложности */
+.tile-select__icon--low {
+    color: var(--success);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(52, 211, 153, 0.15) 100%);
+}
+
+.tile-select__icon--medium {
+    color: var(--warning);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(251, 191, 36, 0.15) 100%);
+}
+
+.tile-select__icon--high {
+    color: var(--primary);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+}
+
+/* Иконки провайдеров */
+.tile-select__icon--yandex {
+    color: #fc3f1d;
+    background: linear-gradient(135deg, rgba(252, 63, 29, 0.15) 0%, rgba(255, 100, 70, 0.15) 100%);
+}
+
+.tile-select__icon--gigachat {
+    color: #00a884;
+    background: linear-gradient(135deg, rgba(0, 168, 132, 0.15) 0%, rgba(0, 200, 150, 0.15) 100%);
+}
+
+.tile-select__icon--onprem {
+    color: var(--text-secondary);
+    background: linear-gradient(135deg, rgba(100, 116, 139, 0.15) 0%, rgba(148, 163, 184, 0.15) 100%);
+}
+
+.tile-select__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.tile-select__title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.tile-select__subtitle {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* ========================================
+   Telegram Button Section
+   ======================================== */
+.telegram-section {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.telegram-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #0088cc 0%, #00a0dc 100%);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    box-shadow: var(--shadow-md);
+}
+
+.telegram-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, #0077b5 0%, #0090c9 100%);
+}
+
+.telegram-btn:active {
+    transform: translateY(0);
+}
+
+.telegram-btn svg {
+    flex-shrink: 0;
+}
+
+/* ========================================
+   Telegram Modal
+   ======================================== */
+.telegram-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+}
+
+.telegram-modal--active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.telegram-modal__content {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: var(--shadow-xl);
+    transform: scale(0.9);
+    transition: transform var(--transition-normal);
+}
+
+.telegram-modal--active .telegram-modal__content {
+    transform: scale(1);
+}
+
+.telegram-modal__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+}
+
+.telegram-modal__input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: var(--font-family);
+    margin-bottom: 16px;
+    transition: border-color var(--transition-fast);
+}
+
+.telegram-modal__input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.telegram-modal__actions {
+    display: flex;
+    gap: 12px;
+}
+
+.telegram-modal__btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.telegram-modal__btn--cancel {
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+}
+
+.telegram-modal__btn--cancel:hover {
+    background: var(--border);
+}
+
+.telegram-modal__btn--send {
+    background: linear-gradient(135deg, #0088cc 0%, #00a0dc 100%);
+    color: white;
+}
+
+.telegram-modal__btn--send:hover {
+    background: linear-gradient(135deg, #0077b5 0%, #0090c9 100%);
+}
+
+.telegram-modal__btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.telegram-modal__status {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.telegram-modal__status--success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+}
+
+.telegram-modal__status--error {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+}
+
+.telegram-modal__hint {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+/* Tabs */
+.telegram-modal__tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.telegram-modal__tab {
+    flex: 1;
+    padding: 10px 12px;
+    background: var(--bg-primary);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.telegram-modal__tab:hover {
+    border-color: var(--primary);
+}
+
+.telegram-modal__tab--active {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.telegram-modal__tab-content {
+    display: none;
+}
+
+.telegram-modal__tab-content--active {
+    display: block;
+}
+
+.telegram-modal__link {
+    display: inline-block;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #0088cc 0%, #00a0dc 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.telegram-modal__link:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.telegram-modal__hint a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.telegram-modal__hint a:hover {
+    text-decoration: underline;
+}
+
+.text-warning {
+    color: var(--warning);
+}
+
+/* ========================================
+   Touch-friendly adjustments
+   ======================================== */
+@media (hover: none) and (pointer: coarse) {
+    .slider::-webkit-slider-thumb {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .slider::-moz-range-thumb {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .select {
+        padding: 16px 48px 16px 16px;
+    }
+    
+    .result-card {
+        padding: 16px;
+    }
+}
+
+/* ========================================
+   Print styles
+   ======================================== */
+@media print {
+    body {
+        background: white;
+    }
+    
+    .container {
+        max-width: 100%;
+    }
+    
+    .input-section,
+    .chart-section {
+        box-shadow: none;
+        border: 1px solid var(--border);
+    }
+}

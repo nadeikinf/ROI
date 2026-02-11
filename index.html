@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор ROI для ИИ-агентов</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="header__title">Калькулятор ROI ИИ-агентов</h1>
+            <p class="header__subtitle">Рассчитайте окупаемость внедрения искусственного интеллекта</p>
+        </header>
+
+        <main class="main">
+            <!-- Входные параметры -->
+            <section class="input-section">
+                <h2 class="section-title">Входные параметры</h2>
+                
+                <!-- Запросов в месяц -->
+                <div class="input-group">
+                    <div class="input-label">
+                        <span class="input-label__text">Запросов в месяц</span>
+                        <span class="input-label__value" id="requestsValue">5 000</span>
+                    </div>
+                    <input 
+                        type="range" 
+                        id="requests" 
+                        class="slider" 
+                        min="100" 
+                        max="100000" 
+                        value="5000" 
+                        step="100"
+                    >
+                    <div class="slider-labels">
+                        <span>100</span>
+                        <span>100 000</span>
+                    </div>
+                </div>
+
+                <!-- Время обработки -->
+                <div class="input-group">
+                    <div class="input-label">
+                        <span class="input-label__text">Время обработки запроса (мин)</span>
+                        <span class="input-label__value" id="timeValue">10</span>
+                    </div>
+                    <input 
+                        type="range" 
+                        id="time" 
+                        class="slider" 
+                        min="1" 
+                        max="60" 
+                        value="10"
+                    >
+                    <div class="slider-labels">
+                        <span>1</span>
+                        <span>60</span>
+                    </div>
+                </div>
+
+                <!-- ЗП в месяц -->
+                <div class="input-group">
+                    <div class="input-label">
+                        <span class="input-label__text">ЗП сотрудника в месяц (₽)</span>
+                        <span class="input-label__value" id="salaryValue">100 000</span>
+                    </div>
+                    <input 
+                        type="range" 
+                        id="salary" 
+                        class="slider" 
+                        min="30000" 
+                        max="500000" 
+                        value="100000" 
+                        step="5000"
+                    >
+                    <div class="slider-labels">
+                        <span>30 000</span>
+                        <span>500 000</span>
+                    </div>
+                </div>
+
+                <!-- Сложность агента -->
+                <div class="input-group">
+                    <label class="input-label__text">Сложность агента</label>
+                    <div class="tile-select" id="complexity">
+                        <div class="tile-select__option" data-value="low">
+                            <div class="tile-select__icon tile-select__icon--low">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                            </div>
+                            <div class="tile-select__content">
+                                <span class="tile-select__title">Низкая</span>
+                                <span class="tile-select__subtitle">1 000 000 ₽</span>
+                            </div>
+                        </div>
+                        <div class="tile-select__option tile-select__option--active" data-value="medium">
+                            <div class="tile-select__icon tile-select__icon--medium">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                            </div>
+                            <div class="tile-select__content">
+                                <span class="tile-select__title">Средняя</span>
+                                <span class="tile-select__subtitle">2 000 000 ₽</span>
+                            </div>
+                        </div>
+                        <div class="tile-select__option" data-value="high">
+                            <div class="tile-select__icon tile-select__icon--high">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    <polygon points="12 6 13.5 9 17 9.5 14.5 12 15 15.5 12 14 9 15.5 9.5 12 7 9.5 10.5 9 12 6"></polygon>
+                                </svg>
+                            </div>
+                            <div class="tile-select__content">
+                                <span class="tile-select__title">Высокая</span>
+                                <span class="tile-select__subtitle">3 000 000 ₽</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Провайдер ИИ -->
+                <div class="input-group">
+                    <label class="input-label__text">Провайдер ИИ</label>
+                    <div class="tile-select" id="provider">
+                        <div class="tile-select__option tile-select__option--active" data-value="yandex">
+                            <div class="tile-select__icon tile-select__icon--yandex">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M3 3h18v18H3V3zm16 16V5H5v14h14zm-8-2H9v-4H7v-2h4v6zm4 0h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                </svg>
+                            </div>
+                            <div class="tile-select__content">
+                                <span class="tile-select__title">YandexGPT</span>
+                                <span class="tile-select__subtitle">Облачный сервис</span>
+                            </div>
+                        </div>
+                        <div class="tile-select__option" data-value="gigachat">
+                            <div class="tile-select__icon tile-select__icon--gigachat">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                                </svg>
+                            </div>
+                            <div class="tile-select__content">
+                                <span class="tile-select__title">GigaChat</span>
+                                <span class="tile-select__subtitle">Сбер</span>
+                            </div>
+                        </div>
+                        <div class="tile-select__option" data-value="onprem">
+                            <div class="tile-select__icon tile-select__icon--onprem">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                            </div>
+                            <div class="tile-select__content">
+                                <span class="tile-select__title">On-Premise</span>
+                                <span class="tile-select__subtitle">Локальный сервер</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Результаты -->
+            <section class="results-section">
+                <h2 class="section-title">Результаты расчёта</h2>
+                
+                <div class="results-grid">
+                    <!-- Экономия времени -->
+                    <div class="result-card">
+                        <div class="result-card__icon result-card__icon--time">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <div class="result-card__content">
+                            <span class="result-card__label">Экономия времени</span>
+                            <span class="result-card__value" id="timeSaved">833 ч/мес</span>
+                        </div>
+                    </div>
+
+                    <!-- Экономия денег -->
+                    <div class="result-card">
+                        <div class="result-card__icon result-card__icon--money">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                        <div class="result-card__content">
+                            <span class="result-card__label">Экономия денег</span>
+                            <span class="result-card__value" id="moneySaved">473 483 ₽/мес</span>
+                        </div>
+                    </div>
+
+                    <!-- Чистая экономия -->
+                    <div class="result-card">
+                        <div class="result-card__icon result-card__icon--net">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                <polyline points="17 6 23 6 23 12"></polyline>
+                            </svg>
+                        </div>
+                        <div class="result-card__content">
+                            <span class="result-card__label">Чистая экономия</span>
+                            <span class="result-card__value" id="netSaved">373 483 ₽/мес</span>
+                        </div>
+                    </div>
+
+                    <!-- Срок окупаемости -->
+                    <div class="result-card result-card--highlight">
+                        <div class="result-card__icon result-card__icon--payback">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </div>
+                        <div class="result-card__content">
+                            <span class="result-card__label">Срок окупаемости</span>
+                            <span class="result-card__value" id="paybackPeriod">5.4 мес</span>
+                        </div>
+                    </div>
+
+                    <!-- ROI -->
+                    <div class="result-card result-card--roi">
+                        <div class="result-card__icon result-card__icon--roi">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                            </svg>
+                        </div>
+                        <div class="result-card__content">
+                            <span class="result-card__label">ROI за первый год</span>
+                            <span class="result-card__value" id="roiValue">77.6%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- График окупаемости -->
+            <section class="chart-section">
+                <h2 class="section-title">График окупаемости</h2>
+                <div class="chart-container">
+                    <canvas id="paybackChart"></canvas>
+                </div>
+                <div class="chart-legend">
+                    <div class="chart-legend__item">
+                        <span class="chart-legend__dot chart-legend__dot--loss"></span>
+                        <span>Зона убытка</span>
+                    </div>
+                    <div class="chart-legend__item">
+                        <span class="chart-legend__dot chart-legend__dot--profit"></span>
+                        <span>Зона прибыли</span>
+                    </div>
+                    <div class="chart-legend__item">
+                        <span class="chart-legend__dot chart-legend__dot--breakeven"></span>
+                        <span>Точка безубыточности</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Кнопка отправки в Telegram (скрыта) -->
+            <section class="telegram-section" style="display: none;">
+                <button class="telegram-btn" id="sendToTelegram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                    </svg>
+                    <span>Отправить в Telegram</span>
+                </button>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>Neoflex © 2025</p>
+        </footer>
+    </div>
+
+    <script src="js/calculator.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
